@@ -1,12 +1,23 @@
 package api
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
+
+	"github.com/Natouche68/poisson-rouge/db"
 )
 
 var getNotesTmpl = template.Must(template.ParseFiles("templates/getNotes.html"))
 
 func GetNotes(w http.ResponseWriter, r *http.Request) {
-	getNotesTmpl.Execute(w, struct{ Notes []string }{Notes: []string{"Note 1", "Note 2", "Note 3", "Note 4", "Note 5", "Note 6"}})
+	database, err := db.GetDB()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	var notes []db.Note
+	database.Order("created_at desc").Find(&notes)
+
+	getNotesTmpl.Execute(w, struct{ Notes []db.Note }{Notes: notes})
 }
