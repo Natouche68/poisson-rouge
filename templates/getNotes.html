@@ -1,1 +1,5 @@
-<div>My notes</div>
+<div class="grid grid-cols-4 gap-4">
+	{{ range .Notes }}
+	<div class="p-4 bg-slate-800 rounded">{{ . }}</div>
+	{{ end}}
+</div>
