@@ -31,9 +31,10 @@
 	</head>
 	<body class="h-screen bg-slate-950 text-slate-50">
 		<div class="container mx-auto">
-			<h1 class="p-4 font-bold font-mono text-4xl text-red-500">
+			<h1 class="py-8 font-bold font-mono text-4xl text-red-500">
 				Poisson Rouge
 			</h1>
+			<div hx-get="/api/notes" hx-trigger="load"></div>
 		</div>
 	</body>
 </html>
